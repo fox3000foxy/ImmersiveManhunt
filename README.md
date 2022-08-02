@@ -5,6 +5,7 @@
 
 
 ![The project banner](./banner.png "Project banner")
+___
 
 ## Introduction
 
