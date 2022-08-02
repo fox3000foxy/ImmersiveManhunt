@@ -1,13 +1,14 @@
-# **Projet SMP Immersif**
+# **Immersive SMP Project**
 
 
-[Version originale](./README.md)
+[French version](./README-fr.md)
 
 
-![La banniere du projet](./banner.png "Banniere du projet")
+![The project banner](./banner.png "Project banner")
 ___
 
-## Introduction ##
+## Introduction
+
 
 Salut joueurs de Minecraft !<br>
 Aujourd'hui, nous annonçons la sortie du **Projet SMP Immersif** !<br>
