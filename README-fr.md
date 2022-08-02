@@ -4,7 +4,7 @@
 [Version originale](./README.md)
 
 
-![The project banner](./banner.png "Project banner")
+![Banniere du projet](./banner.png "Banniere du projet")
 ___
 
 ## Introduction
