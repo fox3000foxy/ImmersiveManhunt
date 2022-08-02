@@ -1,0 +1,6 @@
+TODO:
+	--finish class system--
+	--add claim system-- --fix claim system by farming decay--
+	--finish soundboards--
+
+	upgrade ai ?

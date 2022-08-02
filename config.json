@@ -1,0 +1,8 @@
+{
+	"huntedName": "yourNickname",
+	"botsNames": ["hunter1","hunter2"],
+	"host": "localhost",
+	"port": 25565,
+	"autoStart": true,
+	"ostId": 1
+}
