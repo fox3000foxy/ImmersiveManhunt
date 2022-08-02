@@ -3,12 +3,14 @@
 
 [Version originale](./README.md)
 
-![La bannière du projet](./banner.png "Bannière du projet")
 
-## Introduction
+![La bannière du projet](./banner.png "Bannière du projet")
+___
+
+## Introduction ##
 
 Salut joueurs de Minecraft !<br>
-Aujourd'hui, nous annonçons la sortie du ** Projet SMP Immersif** !<br>
+Aujourd'hui, nous annonçons la sortie du **Projet SMP Immersif** !<br>
 Je sais que certains membres de Discord sont ravis de tester ce projet, alors je publie la **version 1.0**.
 Permettez-moi de présenter en quoi consiste le projet.
 
