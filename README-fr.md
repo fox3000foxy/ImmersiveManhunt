@@ -1,7 +1,7 @@
 # **Project SMP immersif**
 
 
-[French version](./README-fr.md)
+[Version originale](./README.md)
 
 
 ![The project banner](./banner.png "Project banner")
