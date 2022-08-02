@@ -3,7 +3,6 @@
 
 [Version originale](./README.md)
 
-
 ![La bannière du projet](./banner.png "Bannière du projet")
 
 ## Introduction
