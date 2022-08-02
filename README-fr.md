@@ -1,4 +1,4 @@
-# **Immersive SMP Project**
+# **Project SMP immersif**
 
 
 [French version](./README-fr.md)
