@@ -11,7 +11,7 @@ let interruptFarm = false
 let waitBeforeAnotherAttack = {}
 let farmInstance = {}
 let insultCooldown = 0
-let newFarming = false
+let newFarming = true
 const Vec3 = require('vec3')
 function addClaims(username, claimedBlocks) {
 	console.log("[Claimer] Claiming as '" + username + "':", claimedBlocks.length, "blocks")
@@ -38,15 +38,21 @@ module.exports = function (bot, id) {
 	let playing = false
 	let started = false;
 	bot.once('spawn', async function () {
-		let actualPosX = bot.players[huntedName].entity.position.x
+		let coords = await getHuntedCoords()
+		let actualPosX = coords.x
 		bot.chat("/stopsound " + huntedName + " * immersivesmp:ost1")
 		bot.chat("/stopsound " + huntedName + " * immersivesmp:ost2")
 		bot.on('physicTick', async function () {
 			if (id == 0) {
+				let pos = await getHuntedCoords()
+				let coords = new Vec3(
+					pos.x,
+					pos.y,
+					pos.z
+				)
 				if (!playing && bot.players[huntedName].entity) {
-					let coords = bot.players[huntedName].entity.position
 					if (bot.players[huntedName].entity && actualPosX != coords.x && !playing) {
-						let coords = bot.players[huntedName].entity
+						// let coords = bot.players[huntedName].entity
 						huntedPosition = coords.x + " " +
 							coords.y + " " +
 							coords.z + " "
@@ -57,14 +63,15 @@ module.exports = function (bot, id) {
 						playing = true
 					}
 				}
+				// console.log(pos)
 				if (!started) {
-					let coords = bot.players[huntedName].entity.position
 					if (bot.players[huntedName].entity && actualPosX != (coords.x) && !started) {
-						this.farm()
+						farm()
 						started = true
 					}
+					else if (bot.players[huntedName].entity ) bot.lookAt(coords.offset(0, 1.75, 0), true)
 				}
-				else if (bot.players[huntedName].entity) bot.lookAt(coords.offset(0, 1.75, 0), true)
+					// console.log("Started:",started,bot.is_ready_to_fight)
 			}
 		})
 	})
@@ -81,7 +88,9 @@ module.exports = function (bot, id) {
 	bot.is_ready_to_fight = false
 	bot.on('windowOpen', (window) => { bot.window = window })
 	bot.on("health", async () => {
+		// console.log("Wait")
 		const player = bot.players[huntedName]
+		console.log("My health:",bot.health)
 		if ((bot.health >= 8) && bot.is_ready_to_fight && attackingEntity.length == 0 && !newFarming) bot.pvp.attack(player.entity)
 		else if (bot.pvp.target && bot.pvp.target.type == "player") bot.pvp.stop()
 		if (bot.food <= 14 || bot.health <= 8) {
@@ -93,8 +102,8 @@ module.exports = function (bot, id) {
 		if (bot.health == 0) {
 			bot.soundManager.playSound("sk", "death")
 			insultCooldown = 0
-			this.farm()
-		}
+			farm()
+		} 
 	})
 	bot.on('entityHurt', (e) => {
 		if (e == bot.entity) {
@@ -111,7 +120,7 @@ module.exports = function (bot, id) {
 	bot.on('chat', (p, m) => {
 		if (m.startsWith("start") && !autoStart) {
 			console.log("Start to farm")
-			this.farm()
+			farm()
 		}
 	})
 
@@ -281,7 +290,7 @@ module.exports = function (bot, id) {
 				}
 				catch (e) {
 					console.log("[Farm Manager] Pathfinder Error. Retrying... (", e, ")")
-					await this.farmStuff(options, name, minimum)
+					await farmStuff(options, name, minimum)
 				}
 			}
 			console.log("[Farm Manager] " + (craft ? "Crafted" : "Mined"), hasI.pending, name)
@@ -308,22 +317,22 @@ module.exports = function (bot, id) {
 			let craft = 1
 			if (!bot.is_ready_to_fight) {
 				if (!hasItem("iron_helmet", 1).result) {
-					await this.farmStuff(options, "oak_log", 5); await this.sleep(500)
-					if (!hasItem("oak_planks", 6 * 4).result) { await this.farmStuff(options, "oak_planks", 6, craft); console.log("Crafted 6 planks"); await sleep(500); }
+					await farmStuff(options, "oak_log", 5); await this.sleep(500)
+					if (!hasItem("oak_planks", 6 * 4).result) { await farmStuff(options, "oak_planks", 6, craft); console.log("Crafted 6 planks"); await sleep(500); }
 					let craftingBlock = bot.findBlock({
 						matching: blocks["crafting_table"].id,
 						maxDistance: 64
 					})
-					if (!craftingBlock) { await this.farmStuff(options, "crafting_table", 1, craft); await sleep(500) }
-					await this.farmStuff(options, "stick", 4, craft); await sleep(500)
-					await this.farmStuff(options, "wooden_pickaxe", 1, craft); await sleep(500)
-					if (!hasItem("cobblestone", 6).result) await this.farmStuff(options, "stone", hasItem("cobblestone", 6).count); await sleep(500)
-					await this.farmStuff(options, "stone_pickaxe", 2, craft); await sleep(500)
-					if (!hasItem("coal", 5).result) await this.farmStuff(options, "coal_ore", hasItem("coal", 5).pending); await sleep(500)
-					await this.farmStuff(options, "iron_ore", 29); await sleep(500)
-					await this.farmStuff(options, "golden_ore", 4); await sleep(500)
-					if (!hasItem("cobblestone", 12).result) await this.farmStuff(options, "stone", hasItem("cobblestone", 12).count); await sleep(500)
-					await this.farmStuff(options, "furnace", 1, craft); await (500)
+					if (!craftingBlock) { await farmStuff(options, "crafting_table", 1, craft); await sleep(500) }
+					await farmStuff(options, "stick", 4, craft); await sleep(500)
+					await farmStuff(options, "wooden_pickaxe", 1, craft); await sleep(500)
+					if (!hasItem("cobblestone", 6).result) await farmStuff(options, "stone", hasItem("cobblestone", 6).count); await sleep(500)
+					await farmStuff(options, "stone_pickaxe", 2, craft); await sleep(500)
+					if (!hasItem("coal", 5).result) await farmStuff(options, "coal_ore", hasItem("coal", 5).pending); await sleep(500)
+					await farmStuff(options, "iron_ore", 29); await sleep(500)
+					await farmStuff(options, "gold_ore", 4); await sleep(500)
+					if (!hasItem("cobblestone", 12).result) await farmStuff(options, "stone", hasItem("cobblestone", 12).count); await sleep(500)
+					await farmStuff(options, "furnace", 1, craft); await (500)
 					if (hasItem("furnace")) {
 						await bot.equip(items["furnace"]);
 						await sleep(500)
@@ -333,7 +342,7 @@ module.exports = function (bot, id) {
 						bot.chat("/clear @p furnace 1")
 						bot.chat("/clear @p coal 5")
 						bot.chat("/clear @p iron_ore 29")
-						bot.chat("/clear @p golden_ore 4")
+						bot.chat("/clear @p gold_ore 4")
 						await bot.look(0, -0.25, true)
 						bot.chat("/setblock " + p.x + " " + p.y + " " + p.z + " furnace[lit=true,facing=south]");
 						// await sleep(5000) //330000 normallay
@@ -377,7 +386,7 @@ module.exports = function (bot, id) {
 			if (bot.players[huntedName].entity) resolve(bot.players[huntedName].entity.position)
 			else {
 				console.log("[Pathfinder] Player too far ! Rapproching")
-				await bot.chat("/execute at " + huntedName + " run spreadplayers ~ ~ 110 128 false " + bot.username)
+				await bot.chat("/execute at " + huntedName + " run spreadplayers ~ ~ 55 64 false " + bot.username)
 				await bot.chat('/spawnpoint')
 				console.log(bot.players[huntedName].entity)
 				if (bot.players[huntedName].entity) resolve(bot.players[huntedName].entity.position)

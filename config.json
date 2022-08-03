@@ -1,8 +1,8 @@
 {
-	"huntedName": "yourNickname",
-	"botsNames": ["hunter1","hunter2"],
-	"host": "localhost",
-	"port": 25565,
+	"huntedName": "Stella",
+	"botsNames": ["GeorgeNotFound"],
+	"host": "88.136.45.50",
+	"port": 25560,
 	"autoStart": true,
 	"ostId": 1
 }
