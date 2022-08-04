@@ -1,6 +1,6 @@
 # **Immersive SMP Project**
 
-![Badge Visitor](https://visitor-badge.glitch.me/badge?page_id=jwenjian.visitor-badge&left_color=red&right_color=green&left_text=Visits Numbers)
+![Badge Visitor](https://visitor-badge.glitch.me/badge?page_id=jwenjian.visitor-badge&left_color=red&right_color=green&left_text=Visits%20Numbers)
 
 [French version](./README-fr.md)
 
