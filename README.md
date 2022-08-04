@@ -1,6 +1,6 @@
 # **Immersive SMP Project**
 
-![Badge](https://visitor-badge.glitch.me/badge?page_id=fox3000foxy.ImmersiveManhunt&left_color=gray&right_color=green&left_text=Visits%20Numbers)
+![Vists](https://visitor-badge.glitch.me/badge?page_id=fox3000foxy.ImmersiveManhunt&left_color=gray&right_color=green&left_text=Visits%20Numbers)
 
 [French version](./README-fr.md)
 
